@@ -1,5 +1,5 @@
-import { Ticket } from '../../../../models/ticket';
-import { natsWrapper } from '../../../../nats-wrapper';
+import { Ticket } from '../../../models/ticket';
+import { natsWrapper } from '../../../nats-wrapper';
 import { OrderCreatedListener } from '../order-created-listener';
 import mongoose from 'mongoose';
 import { OrderCreatedEvent, OrderStatus } from '@bkticketing/common';
@@ -55,4 +55,18 @@ it('acks the message', async () => {
   await listener.onMessage(data, msg);
 
   expect(msg.ack).toHaveBeenCalled();
+});
+
+it('publishes a ticket update event', async () => {
+  const { listener, ticket, data, msg } = await setup();
+
+  await listener.onMessage(data, msg);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+
+  const ticketUpdatedData = JSON.parse(
+    (natsWrapper.client.publish as jest.Mock).mock.calls[0][1]
+  );
+
+  expect(data.id).toEqual(ticketUpdatedData.orderId);
 });
