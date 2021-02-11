@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: latest-ubuntu
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - run: cd auth && docker build -t bhargavk2/auth
