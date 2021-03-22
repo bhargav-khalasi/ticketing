@@ -1,9 +1,9 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import request from 'supertest';
 import jwt from 'jsonwebtoken';
 
-import { app } from '../app';
+process.env.STRIPE_KEY =
+  'sk_test_51IPLsCIQRR4TErP4c2kDebIEncNHxe66zI8ETLpJDwfZQ3g5R7shhNUfztWWsU3UvK3afMG10T7FhJE4NQ1z2TTO00KfRES77f';
 
 declare global {
   namespace NodeJS {
