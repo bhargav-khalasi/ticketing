@@ -6,12 +6,10 @@ deploy:
       - ./infra/k8s/*
       - ./infra/k8s-dev/*
 build:
-  # local:
-  #   push: false
-  googleCloudBuild:
-    projectId: i-guide-300511
+  local:
+    push: false
   artifacts:
-    - image: us.gcr.io/i-guide-300511/auth
+    - image: bhargavk2/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -19,7 +17,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/i-guide-300511/client
+    - image: bhargavk2/client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -27,7 +25,7 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: us.gcr.io/i-guide-300511/tickets
+    - image: bhargavk2/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -35,7 +33,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/i-guide-300511/orders
+    - image: bhargavk2/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -43,7 +41,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/i-guide-300511/payments
+    - image: bhargavk2/payments
       context: payments
       docker:
         dockerfile: Dockerfile
@@ -51,7 +49,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: us.gcr.io/i-guide-300511/expiration
+    - image: bhargavk2/expiration
       context: expiration
       docker:
         dockerfile: Dockerfile
